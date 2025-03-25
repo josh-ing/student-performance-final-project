@@ -3,14 +3,24 @@ import pandas as pd
   
 
 def frequency_tables(X):
+<<<<<<< Updated upstream
     sex_freq = X['sex'].value_counts()
     age_groups = [14,16,19,22]
     age_labels = ['15-16', '17-19', '20-22']
+=======
+    df = pd.concat([X, y], axis=1)
+>>>>>>> Stashed changes
 
-    X['age_group'] = pd.cut(X['age'], bins=age_groups, labels=age_labels, right=True)
+    # Generate frequency table for sex
+    sex_freq = df.groupby('sex')[['G1', 'G2', 'G3']].count()
 
-    # Frequency table for age groups
-    age_freq = X['age_group'].value_counts().sort_index()
+    # Define age groups properly
+    age_groups = [14, 17, df['age'].max() + 1]  # Ensure all ages are covered
+    age_labels = ['15-17', '18-22']
+    df['age_group'] = pd.cut(df['age'], bins=age_groups, labels=age_labels, right=False)
+
+    # Generate frequency table for age groups
+    age_freq = df.groupby('age_group')[['G1', 'G2', 'G3']].count()
 
     return sex_freq, age_freq
 
