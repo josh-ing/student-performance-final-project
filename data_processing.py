@@ -60,6 +60,10 @@ def plot_subgroups(X, y):
     plt.tight_layout()
     plt.savefig('age_group_versus_score.png')
 
+
+def calculate_fairness_metric(X, y):
+    'test'
+    
 if __name__ == "__main__":
     # fetch dataset 
     student_performance = fetch_ucirepo(id=320) 
