@@ -1,4 +1,5 @@
 import pandas as pd
+from tabulate import tabulate
 
 def generate_frequency_tables(input_file):
     # load dataset
@@ -15,8 +16,12 @@ def generate_frequency_tables(input_file):
     for protected_class in protected_classes:
         print(f"\nFrequency table for {protected_class}:")
         for dep_var in dependent_variables:
+            # Generate the frequency table
             freq_table = pd.crosstab(df[protected_class], df[dep_var], margins=True)
-            print(f"\n{protected_class} vs {dep_var}:\n", freq_table)
+            
+            # Format the frequency table with tabulate and add vertical and horizontal lines
+            print(f"\n{protected_class} vs {dep_var}:\n")
+            print(tabulate(freq_table, headers='keys', tablefmt='grid', showindex=True))
 
 file_path = "student-por.xlsx"
 generate_frequency_tables(file_path)
