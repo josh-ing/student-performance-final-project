@@ -4,14 +4,15 @@ import matplotlib.pyplot as plt
   
 
 def frequency_tables(X):
+<<<<<<< Updated upstream
     sex_freq = X['sex'].value_counts()
     age_groups = [14, 17, X['age'].max()]
     age_labels = ['15-17', '18+']
 
     X['age_group'] = pd.cut(X['age'], bins=age_groups, labels=age_labels, right=True)
 
-    # Frequency table for age groups
-    age_freq = X['age_group'].value_counts().sort_index()
+    # Generate frequency table for age groups
+    age_freq = df.groupby('age_group')[['G1', 'G2', 'G3']].count()
 
     return sex_freq, age_freq
 
